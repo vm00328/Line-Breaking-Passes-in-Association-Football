@@ -42,6 +42,7 @@ away, = ax.plot([], [], ms=11, markerfacecolor='#0000FF', **marker_kwargs) #blue
 home, = ax.plot([], [], ms=11, markerfacecolor='#ff0000', **marker_kwargs) #red
 
 player_labels = {}
+player_arrows = {}
 def animate(i):
     """ Function to animate the data. Each frame it sets the data for the players and the ball."""
     # set the ball data with the x and y positions for the ith frame
@@ -70,6 +71,13 @@ def animate(i):
                                     fontsize=11, color='white', ha='center', va='center')
             player_labels[i] = label
 
+        # create Arrow objects for each player's direction HOME TEAM
+        vx, vy = row['vx'], row['vy']
+        if i in player_arrows:
+            player_arrows[i].remove()
+        arrow = ax.arrow(x, y, vx, vy, head_width=1, head_length=1, fc='red', ec='red')
+        player_arrows[i] = arrow  
+
     for i, row in df_tracking_away[df_tracking_away['frame']==frame].iterrows(): #df_tracking_away['frame'].min()
         # get the player's current position
         x, y = row['x'], row['y']
@@ -82,8 +90,15 @@ def animate(i):
            label = ax.annotate(str(jersey_no), xy=(x, y),
                                    fontsize=11, color='white', ha='center', va='center')
            player_labels[i] = label
+           
+        # create Arrow objects for each player's direction AWAY TEAM
+        vx, vy = row['vx'], row['vy']
+        if i in player_arrows:
+            player_arrows[i].remove()
+        arrow = ax.arrow(x, y, vx, vy, head_width=1, head_length=1, fc='blue', ec='blue')
+        player_arrows[i] = arrow
         
-        # remove labels for players who are not in the current frame
+    # remove labels for players who are not in the current frame
     for i in list(player_labels):
         if i not in df_tracking_home[df_tracking_home['frame']==frame].index and i not in df_tracking_away[df_tracking_away['frame']==frame].index:
             label = player_labels.pop(i)   #old approach: player_labels[i].remove()
@@ -94,9 +109,18 @@ def animate(i):
 # frames=len(df_tracking_ball) needed only when exporting the animation; interval=50 is an optional argument and sets the interval between frames in miliseconds
 anim = animation.FuncAnimation(fig, animate, frames=len(df_tracking_ball), interval=50, blit=True)
 
-f = r"C://Users/Vlado/Documents/GitHub/AZ/AZ/animations/working.gif" # try with .mov, .avi
+f = r"C://Users/Vlado/Documents/GitHub/AZ/AZ/animations/velocity_v2.gif" # try with .mov, .avi
 writervideo = animation.PillowWriter(fps = 25)
 anim.save(f, writer = writervideo)
+
+
+
+
+
+
+
+
+
 
 ################################################Clustering#############################################
 
