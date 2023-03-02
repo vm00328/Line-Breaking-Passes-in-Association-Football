@@ -37,9 +37,9 @@ fig, ax = pitch.draw(figsize=(16, 10.4))
 
 # Setting up the pitch plot markers we want to animate
 marker_kwargs = {'marker': 'o', 'markeredgecolor': 'black', 'linestyle': 'None'}                 
-ball, = ax.plot([], [], ms=6, markerfacecolor='w', zorder=3, **marker_kwargs)
-away, = ax.plot([], [], ms=10, markerfacecolor='#0000FF', **marker_kwargs) #blue
-home, = ax.plot([], [], ms=10, markerfacecolor='#ff0000', **marker_kwargs) #red
+ball, = ax.plot([], [], ms=8, markerfacecolor='w', zorder=3, **marker_kwargs)
+away, = ax.plot([], [], ms=11, markerfacecolor='#0000FF', **marker_kwargs) #blue
+home, = ax.plot([], [], ms=11, markerfacecolor='#ff0000', **marker_kwargs) #red
 
 player_labels = {}
 def animate(i):
@@ -67,7 +67,7 @@ def animate(i):
             # otherwise, create a new label and add it to the plot
         else:
             label = ax.annotate(str(jersey_no), xy=(x, y),
-                                    fontsize=8, color='white', ha='center', va='center')
+                                    fontsize=11, color='white', ha='center', va='center')
             player_labels[i] = label
 
     for i, row in df_tracking_away[df_tracking_away['frame']==frame].iterrows(): #df_tracking_away['frame'].min()
@@ -80,7 +80,7 @@ def animate(i):
            label.xy = (x, y)
         else:
            label = ax.annotate(str(jersey_no), xy=(x, y),
-                                   fontsize=8, color='white', ha='center', va='center')
+                                   fontsize=11, color='white', ha='center', va='center')
            player_labels[i] = label
         
         # remove labels for players who are not in the current frame
@@ -94,7 +94,7 @@ def animate(i):
 # frames=len(df_tracking_ball) needed only when exporting the animation; interval=50 is an optional argument and sets the interval between frames in miliseconds
 anim = animation.FuncAnimation(fig, animate, frames=len(df_tracking_ball), interval=50, blit=True)
 
-f = r"C://Users/Vlado/Desktop/AZ/opitInt.gif" # try with .mov, .avi
+f = r"C://Users/Vlado/Desktop/AZ/opitIntBig.gif" # try with .mov, .avi
 writervideo = animation.PillowWriter(fps = 25)
 anim.save(f, writer = writervideo)
 
