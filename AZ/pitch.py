@@ -39,44 +39,56 @@ marker_kwargs = {'marker': 'o', 'markeredgecolor': 'black', 'linestyle': 'None'}
 ball, = ax.plot([], [], ms=6, markerfacecolor='w', zorder=3, **marker_kwargs)
 away, = ax.plot([], [], ms=10, markerfacecolor='#0000FF', **marker_kwargs) #blue
 home, = ax.plot([], [], ms=10, markerfacecolor='#ff0000', **marker_kwargs) #red
-"""
-jerseys = {}
 
-# create Text objects for each player's jersey number
-for i, row in df_tracking_home[df_tracking_home['frame']==df_tracking_home['frame'].min()].iterrows():
-    jerseys[row['jersey_no']] = Text(ax, row['x'], row['y'], str(row['jersey_number']), color='white', fontsize=8, ha='center', va='center')
-
-for i, row in df_tracking_away[df_tracking_away['frame']==df_tracking_away['frame'].min()].iterrows():
-    jerseys[row['jersey_no']] = Text(ax, row['x'], row['y'], str(row['jersey_number']), color='white', fontsize=8, ha='center', va='center')
-"""
+player_labels = {}
 def animate(i):
     """ Function to animate the data. Each frame it sets the data for the players and the ball."""
     # set the ball data with the x and y positions for the ith frame
     ball.set_data(df_tracking_ball.iloc[i, 5], df_tracking_ball.iloc[i, 6]) # IMPORTANT, DEPENDS ON WHETHER COLUMNS WERE DROPPED
     # get the frame id for the ith frame
     frame = df_tracking_ball.iloc[i, 2]
-    # set the player data using the frame id
+    # set the player data using the frame id .set_data takes takes two one-dimensional arrays represneting x and y values to plot
     away.set_data(df_tracking_away.loc[df_tracking_away.frame == frame, 'x'],
                   df_tracking_away.loc[df_tracking_away.frame == frame, 'y'])
     home.set_data(df_tracking_home.loc[df_tracking_home.frame == frame, 'x'],
                   df_tracking_home.loc[df_tracking_home.frame == frame, 'y'])
     
-    # display player numbers and velocities for home team
-    for index, row in df_tracking_home[df_tracking_home['frame'] == frame].iterrows():
-        ax.text(row['x'], row['y'], str(row['jersey_no']), color='white', fontsize=8, ha='center', va='center')
-        ax.arrow(row['x'], row['y'], row['vx'], row['vy'], head_width=0.3, head_length=0.3, fc='r', ec='r')
+    # create Text objects for each player's jersey number
+    for i, row in df_tracking_home[df_tracking_home['frame']==frame].iterrows(): #df_tracking_home['frame'].min()
+        # get the player's current position
+        x, y = row['x'], row['y']
+        # if the player already has a label, move it to their current position
+        if i in player_labels:
+            player_labels[i].set_position((x, y)) #the old is: player_labels[i].xy = (x, y)
+            # otherwise, create a new label and add it to the plot
+        else:
+            label = ax.annotate(str(row['jersey_no']), xy=(x, y),
+                                    fontsize=8, color='white', ha='center', va='center')
+            player_labels[i] = label
+
+    for i, row in df_tracking_away[df_tracking_away['frame']==frame].iterrows(): #df_tracking_away['frame'].min()
+        # get the player's current position
+        x, y = row['x'], row['y']
+        if i in player_labels:
+            player_labels[i].set_position((x, y)) #the old is: player_labels[i].xy = (x, y)
+            # otherwise, create a new label and add it to the plot
+        else:
+            label = ax.annotate(str(row['jersey_no']), xy=(x, y),
+                                    fontsize=8, color='white', ha='center', va='center')
+            player_labels[i] = label
+            
+        # remove labels for players who are not in the current frame
+    for i in list(player_labels):
+        if i not in df_tracking_home[df_tracking_home['frame']==frame].index and i not in df_tracking_away[df_tracking_away['frame']==frame].index:
+            player_labels[i].remove()
+            del player_labels[i]
     
-    # display player numbers and velocities for away team
-    for index, row in df_tracking_away[df_tracking_away['frame'] == frame].iterrows():
-        ax.text(row['x'], row['y'], str(row['jersey_no']), color='white', fontsize=8, ha='center', va='center')
-        ax.arrow(row['x'], row['y'], row['vx'], row['vy'], head_width=0.3, head_length=0.3, fc='b', ec='b')
-        
     return ball, away, home
 
 # frames=len(df_tracking_ball) needed only when exporting the animation; interval=50 is an optional argument and sets the interval between frames in miliseconds
 anim = animation.FuncAnimation(fig, animate, frames=len(df_tracking_ball), interval=50, blit=True)
 
-f = r"C://Users/Vlado/Desktop/AZ/animation_02_03_1.gif" # try with .mov, .avi
+f = r"C://Users/Vlado/Desktop/AZ/working_jersey_no.gif" # try with .mov, .avi
 writervideo = animation.PillowWriter(fps = 25)
 anim.save(f, writer = writervideo)
 
