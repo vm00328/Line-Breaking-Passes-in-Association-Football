@@ -16,6 +16,7 @@ import imageio
 import ffmpeg
 import os
 from matplotlib.animation import FuncAnimation, PillowWriter, FFMpegWriter, MovieWriter
+from matplotlib.text import Text
 
 df_AZ_VIT_cleaned = pd.read_csv("C:/Users/Vlado/Desktop/AZ/AZ/data/AZ_VIT_tracking_cleaned.csv")
 df_tracking_home = df_AZ_VIT_cleaned[df_AZ_VIT_cleaned['team']==0]
@@ -35,7 +36,7 @@ pitch = Pitch(pitch_type='tracab', goal_type='line', pitch_length=105, pitch_wid
 fig, ax = pitch.draw(figsize=(16, 10.4))
 
 # Setting up the pitch plot markers we want to animate
-marker_kwargs = {'marker': 'o', 'markeredgecolor': 'black', 'linestyle': 'None'}                
+marker_kwargs = {'marker': 'o', 'markeredgecolor': 'black', 'linestyle': 'None'}                 
 ball, = ax.plot([], [], ms=6, markerfacecolor='w', zorder=3, **marker_kwargs)
 away, = ax.plot([], [], ms=10, markerfacecolor='#0000FF', **marker_kwargs) #blue
 home, = ax.plot([], [], ms=10, markerfacecolor='#ff0000', **marker_kwargs) #red
@@ -57,42 +58,47 @@ def animate(i):
     for i, row in df_tracking_home[df_tracking_home['frame']==frame].iterrows(): #df_tracking_home['frame'].min()
         # get the player's current position
         x, y = row['x'], row['y']
+        jersey_no = int(row['jersey_no'])
         # if the player already has a label, move it to their current position
         if i in player_labels:
-            player_labels[i].set_position((x, y)) #the old is: player_labels[i].xy = (x, y)
+            label = player_labels[i]
+            label.set_text(str(jersey_no))
+            label.xy = (x, y)
             # otherwise, create a new label and add it to the plot
         else:
-            label = ax.annotate(str(row['jersey_no']), xy=(x, y),
+            label = ax.annotate(str(jersey_no), xy=(x, y),
                                     fontsize=8, color='white', ha='center', va='center')
             player_labels[i] = label
 
     for i, row in df_tracking_away[df_tracking_away['frame']==frame].iterrows(): #df_tracking_away['frame'].min()
         # get the player's current position
         x, y = row['x'], row['y']
+        jersey_no = int(row['jersey_no'])
         if i in player_labels:
-            player_labels[i].set_position((x, y)) #the old is: player_labels[i].xy = (x, y)
-            # otherwise, create a new label and add it to the plot
+           label = player_labels[i]
+           label.set_text(str(jersey_no))
+           label.xy = (x, y)
         else:
-            label = ax.annotate(str(row['jersey_no']), xy=(x, y),
-                                    fontsize=8, color='white', ha='center', va='center')
-            player_labels[i] = label
-            
+           label = ax.annotate(str(jersey_no), xy=(x, y),
+                                   fontsize=8, color='white', ha='center', va='center')
+           player_labels[i] = label
+        
         # remove labels for players who are not in the current frame
     for i in list(player_labels):
         if i not in df_tracking_home[df_tracking_home['frame']==frame].index and i not in df_tracking_away[df_tracking_away['frame']==frame].index:
-            player_labels[i].remove()
-            del player_labels[i]
+            label = player_labels.pop(i)   #old approach: player_labels[i].remove()
+            label.remove()                 #old approach: del player_labels[i]
     
     return ball, away, home
 
 # frames=len(df_tracking_ball) needed only when exporting the animation; interval=50 is an optional argument and sets the interval between frames in miliseconds
 anim = animation.FuncAnimation(fig, animate, frames=len(df_tracking_ball), interval=50, blit=True)
 
-f = r"C://Users/Vlado/Desktop/AZ/working_jersey_no.gif" # try with .mov, .avi
+f = r"C://Users/Vlado/Desktop/AZ/opitInt.gif" # try with .mov, .avi
 writervideo = animation.PillowWriter(fps = 25)
 anim.save(f, writer = writervideo)
 
-#anim.save('C:/Users/Vlado/Desktop/AZ/AZ/animation_01_03.mp4', dpi=150, fps=25, savefig_kwargs={'pad_inches':0, 'facecolor':'#457E29'})
+################################################Clustering#############################################
 
 # Extract positional features from the tracking data
 features = df_tracking_home[["x", "y"]]
