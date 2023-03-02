@@ -94,7 +94,7 @@ def animate(i):
 # frames=len(df_tracking_ball) needed only when exporting the animation; interval=50 is an optional argument and sets the interval between frames in miliseconds
 anim = animation.FuncAnimation(fig, animate, frames=len(df_tracking_ball), interval=50, blit=True)
 
-f = r"C://Users/Vlado/Desktop/AZ/opitIntBig.gif" # try with .mov, .avi
+f = r"C://Users/Vlado/Documents/GitHub/AZ/AZ/animations/working.gif" # try with .mov, .avi
 writervideo = animation.PillowWriter(fps = 25)
 anim.save(f, writer = writervideo)
 
