@@ -1,0 +1,19 @@
+from matplotlib.colors import Normalize, LinearSegmentedColormap
+
+colors = [(1, 0, 0), (1, 1, 1)]
+cmap = LinearSegmentedColormap.from_list('custom', colors)
+
+line_length = np.sqrt((x_sorted[-1]-x_sorted[0])**2 + (y_sorted[-1]-y_sorted[0])**2)
+                color = cmap(norm(line_length))
+                line.set_color(color)
+
+ # Calculate the length of the line
+                dx = np.diff(x_sorted)
+                dy = np.diff(y_sorted)
+                line_length = np.sqrt(dx**2 + dy**2).sum()
+
+                # Normalize the length of the line to a value between 0 and 1
+                line_length_normalized = (line_length - df_home_10['cluster'].min()) / (df_home_10['cluster'].max() - df_home_10['cluster'].min())
+
+                # Convert the normalized length to a RGB color value
+                color = (1-line_length_normalized, 0, 0)
