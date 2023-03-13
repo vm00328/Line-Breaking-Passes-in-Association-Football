@@ -10,10 +10,10 @@ from sklearn.cluster import KMeans
 
 data = pd.read_csv("C:/Users/Vlado/Desktop/AZ/AZ/data/AZ_VIT_tracking_cleaned.csv")
 df_home = data[data['team']==0]
-df_home = df_home[(df_home['frame'] >= 1700842) & (df_home['frame'] < 1700942)].copy() #1690842
+df_home = df_home[(df_home['frame'] >= 1700842) & (df_home['frame'] < 1701142)].copy() #1690842
 df_home_10 = df_home.drop(df_home[df_home['jersey_no'] == 16].index)
 df_away = data[data['team']==1] #MISSING frame stamp but works?
-df_ball = data[data['team'].isna() & (data['frame'] >=1700842) & (data['frame'] < 1700942)].copy()
+df_ball = data[data['team'].isna() & (data['frame'] >=1700842) & (data['frame'] < 1701142)].copy()
 
 pitch = Pitch(pitch_type='tracab', goal_type='line', pitch_length=105, pitch_width=68,
               axis=True, label=True, corner_arcs=True, line_color='white', pitch_color = "grass", stripe =True)
@@ -50,13 +50,18 @@ def animate(i):
             if len(cluster_frame) > 1:
                 x = cluster_frame['x'].values
                 y = cluster_frame['y'].values
-                
+                # Sort the y-values in descending order
+                y_sorted = sorted(y, reverse=True)
+                # Get the sorted indices of the y-values
+                y_indices = [list(y).index(y_val) for y_val in y_sorted]
+                # Sort the x-values based on the sorted y-indices
+                x_sorted = [x[i] for i in y_indices]
                 if c in player_lines:       # If a line for this cluster already exists, update its coordinates
                     prev_line = player_lines[c]
-                    prev_line.set_data(x, y)
+                    prev_line.set_data(x_sorted, y_sorted)
                 
                 else:                       # Otherwise, create a new line for this cluster
-                    line, = ax.plot(x, y, linewidth=2, color='white')
+                    line, = ax.plot(x_sorted, y_sorted, linewidth=2, color='white')
                     player_lines[c] = line
         prev_line_update = i                # Store the current frame as the previous line update
     
@@ -92,6 +97,6 @@ def animate(i):
     return ball, away, home
 
 anim = animation.FuncAnimation(fig, animate, frames=len(df_ball), interval=50, blit=True)
-f = r"C://Users/Vlado/Documents/GitHub/AZ/AZ/animations/proba60.gif"
+f = r"C://Users/Vlado/Documents/GitHub/AZ/AZ/Visualizations/proba68.gif"
 writervideo = animation.PillowWriter(fps = 25)
 anim.save(f, writer = writervideo)
