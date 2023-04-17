@@ -1,0 +1,5 @@
+off ball analysis when defending
+line breaking pases, in-between the lines pases
+which players break passes
+
+classifying (our case) versus computer vision (done by Statsbomb)
