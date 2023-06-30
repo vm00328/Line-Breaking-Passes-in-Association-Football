@@ -1,0 +1,95 @@
+[1] Gabriel Anzer and Pascal Bauer. 2021. A goal scoring probability model for shots
+based on synchronized positional and event data in football (soccer). Frontiers in
+Sports and Active Living (2021), 53.
+[2] Gabriel Anzer and Pascal Bauer. 2022. Expected passes: Determining the diffi-
+culty of a pass in football (soccer) using spatio-temporal data. Data mining and
+knowledge discovery 36, 1 (2022), 295–317.
+[3] Guillermo Martinez Arastey. 2018. PERFORMANCE INDICATORS IN FOOTBALL.
+SPORT PERFORMANCE ANALYSIS (2018).
+[4] Pascal Bauer, Gabriel Anzer, and Joshua Wyatt Smith. 2022. Individual role classi-
+fication for players defending corners in football (soccer). Journal of Quantitative
+Analysis in Sports 18, 2 (2022), 147–160.
+[5] Alina Bialkowski, Patrick Lucey, Peter Carr, Iain Matthews, Sridha Sridharan, and
+Clinton Fookes. 2016. Discovering team structures in soccer from spatiotemporal
+data. IEEE Transactions on Knowledge and Data Engineering 28, 10 (2016), 2596–
+2605.
+[6] Alina Bialkowski, Patrick Lucey, Peter Carr, Yisong Yue, Sridha Sridharan, and
+Iain Matthews. 2014. Large-scale analysis of soccer matches using spatiotemporal
+tracking data. (2014), 725–730.
+[7] Tom Boomstra. 2022. Towards automatically classifying football formations for
+video analysis. (2022).
+[8] Lotte Bransen. 2018. One pass is not the other: a data-driven overview of the
+most effective passers in European football. (2018).
+[9] Joel Brooks, Matthew Kerr, and John Guttag. 2016. Developing a data-driven
+player ranking in soccer using predictive model weights. (2016), 49–55.
+[10] Fabio Giuliano Caetano, Sylvio Barbon Junior, Ricardo da Silva Torres, Sergio Au-
+gusto Cunha, Paulo Régis Caron Ruffino, Luiz Eduardo Barreto Martins, and
+Felipe Arruda Moura. 2021. Football player dominant region determined by a
+novel model based on instantaneous kinematics variables. Scientific Reports 11, 1
+(2021), 18209.
+[11] Arthur P Dempster, Nan M Laird, and Donald B Rubin. 1977. Maximum likelihood
+from incomplete data via the EM algorithm. Journal of the royal statistical society:
+series B (methodological) 39, 1 (1977), 1–22.
+[12] Floris R Goes, Michel S Brink, Marije T Elferink-Gemser, Matthias Kempe, and
+Koen APM Lemmink. 2021. The tactics of successful attacks in professional
+association football: large-scale spatiotemporal analysis of dynamic subgroups
+using position tracking data. Journal of Sports Sciences 39, 5 (2021), 523–532.
+[13] Joachim Gudmundsson and Thomas Wolle. 2012. Football analysis using spatio-
+temporal tools. (2012), 566–569.
+[14] Laszlo Gyarmati and Xavier Anguera. 2015. Automatic extraction of the passing
+strategies of soccer teams. arXiv preprint arXiv:1508.02171 (2015).
+[15] Michael Horton, Joachim Gudmundsson, Sanjay Chawla, and Joël Estephan.
+2015. Automated classification of passing in football. In Advances in Knowledge
+Discovery and Data Mining: 19th Pacific-Asia Conference, PAKDD 2015, Ho Chi
+Minh City, Vietnam, May 19-22, 2015, Proceedings, Part II. Springer, 319–330.
+[16] Antonio Irpino and Rosanna Verde. 2006. A new Wasserstein based distance
+for the hierarchical clustering of histogram symbolic data. In Data science and
+classification. Springer, 185–192.
+[17] Patrick Lucey, Alina Bialkowski, Peter Carr, Eric Foote, and Iain Matthews. 2012.
+Characterizing multi-agent team behavior from partial team tracings: Evidence
+from the english premier league. In Proceedings of the AAAI Conference on Artifi-
+cial Intelligence, Vol. 26. 1387–1393.
+[18] Patrick Lucey, Alina Bialkowski, Peter Carr, Stuart Morgan, Iain Matthews, and
+Yaser Sheikh. 2013. Representing and discovering adversarial team behaviors
+using player roles. In Proceedings of the IEEE Conference on Computer Vision and
+Pattern Recognition. 2706–2713.
+[19] Patrick Lucey, Dean Oliver, Peter Carr, Joe Roth, and Iain Matthews. 2013. As-
+sessing team strategy using spatiotemporal data. In Proceedings of the 19th ACM
+SIGKDD international conference on Knowledge discovery and data mining. 1366–
+1374.
+[20] Ian G McHale and Samuel D Relton. 2018. Identifying key players in soccer
+teams using network analysis and pass difficulty. European Journal of Operational
+Research 268, 1 (2018), 339–347.
+[21] Kuba Michalczyk. [n. d.]. How impactful are line-breaking passes?
+[22] Eric Müller-Budack, Jonas Theiner, Robert Rein, and Ralph Ewerth. 2019. " Does
+4-4-2 exist?"– An Analytics Approach to Understand and Classify Football Team
+Formations in Single Match Situations. In Proceedings Proceedings of the 2nd
+International Workshop on Multimedia Content Analysis in Sports. 25–33.
+[23] Takuma Narizuka and Yoshihiro Yamazaki. 2019. Clustering algorithm for for-
+mations in football games. Scientific reports 9, 1 (2019), 13172.
+[24] Martí Perarnau. 2014. Pep Confidential: Inside Pep Guardiola’s First Season at
+Bayern Munich. Birlinn.
+[25] Paul Power, Hector Ruiz, Xinyu Wei, and Patrick Lucey. 2017. Not all passes
+are created equal: Objectively measuring the risk and reward of passes in soccer
+from tracking data. (2017), 1605–1613.
+[26] Charles Reep and Bernard Benjamin. 1968. Skill and chance in association football.
+Journal of the Royal Statistical Society. Series A (General) 131, 4 (1968), 581–585
+[27] Laurence Shaw. 2022. A brief history of statistics in soccer: Why actual goals
+remain king in predicting who will win? (2022). https://phys.org/news/2022-12-
+history-statistics-soccer-actual-goals.html
+[28] Laurie Shaw and Mark Glickman. 2019. Dynamic analysis of team strategy in
+professional football. Barca sports analytics summit 13 (2019).
+[29] Hadi Sotudeh. [n. d.]. Potential Penetrative Pass(P3).
+[30] William Spearman. 2018. Beyond expected goals. (2018), 1–17.
+[31] Sky Sports. 2022. World Cup 2022: Qatar tournament to feature semi-automated
+offside technology with ball sensors and cameras. (2022).
+[32] StatsBomb. 2022. StatsBomb Launch New 360 Metrics: Line-Breaking Passes and
+Ball Receipts In Space.
+[33] et al Stein, Manuel. 2019. From Movement to Events: Improving Soccer Match
+Annotations. (2019).
+[34] Łukasz Szczepański and Ian McHale. 2016. Beyond completion rate: evaluating
+the passing ability of footballers. Journal of the Royal Statistical Society. Series A
+(Statistics in Society) (2016), 513–533.
+[35] Paul Worsfold and Kirstin Macbeth. 2009. The reliability of television broadcasting
+statistics in soccer. International Journal of Performance Analysis in Sport 9, 3
+(2009), 344–353.
