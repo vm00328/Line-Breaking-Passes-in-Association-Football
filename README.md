@@ -5,6 +5,10 @@ This repository contains the implementation of a data-driven system for **automa
 
 The project combines **tracking data** with **event data** and applies **unsupervised learning** to dynamically model defensive formation lines, enabling a richer analysis of passing performance beyond traditional pass completion metrics.
 
+<p align = "center">
+  <img src = "AZ/Visualizations/line_breaking_pass_title.png" width = "75%" alt = "Line-breaking pass visualization">
+</p>
+
 ---
 
 ## 📌 Project Motivation
